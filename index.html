@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parul University - Smart Campus Event Manager</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://via.placeholder.com/40x40?text=PU" alt="Parul University" class="me-2">
+                Parul University Event Manager
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('dashboard')">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('events')">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('chat')">Support Chat</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" id="navMenu">
+                    <!-- Will be populated by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section id="loginSection" class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3><i class="fas fa-university"></i> Parul University Login</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="collegeId" class="form-label">College ID</label>
+                                <input type="text" class="form-control" id="collegeId" placeholder="Enter your College ID" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="#" onclick="showRegistration()">Don't have an account? Register here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registrationSection" class="container mt-5" style="display: none;">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-success text-white text-center">
+                        <h3><i class="fas fa-user-plus"></i> Parul University Registration</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="registrationForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="regCollegeId" class="form-label">College ID</label>
+                                        <input type="text" class="form-control" id="regCollegeId" placeholder="Enter your College ID" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="regName" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="regName" placeholder="Enter your full name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="regEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="regEmail" placeholder="Enter your email" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="regPhone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="regPhone" placeholder="Enter your phone number" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="regPassword" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="regPassword" placeholder="Enter your password" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="regConfirmPassword" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="regConfirmPassword" placeholder="Confirm your password" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Register</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="#" onclick="showLogin()">Already have an account? Login here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div id="mainContent" style="display: none;">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="container mt-4">
+            <h2><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h5>Total Events</h5>
+                            <h2 id="totalEvents">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h5>My Events</h5>
+                            <h2 id="myEvents">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <h5>Pending Payments</h5>
+                            <h2 id="pendingPayments">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <h5>Messages</h5>
+                            <h2 id="unreadMessages">0</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="container mt-4" style="display: none;">
+            <h2><i class="fas fa-calendar-alt"></i> Events</h2>
+            <div id="eventsContainer" class="row">
+                <!-- Events will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" class="container mt-4" style="display: none;">
+            <h2><i class="fas fa-user"></i> Profile</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="Profile Picture">
+                            <h5 id="profileName">-</h5>
+                            <p id="profileCollegeId">-</p>
+                            <p id="profileEmail">-</p>
+                            <p id="profilePhone">-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="profileTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="myevents-tab" data-bs-toggle="tab" data-bs-target="#myevents" type="button" role="tab">My Events</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button" role="tab">Payment History</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button" role="tab">Notifications</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="profileTabsContent">
+                                <div class="tab-pane fade show active" id="myevents" role="tabpanel">
+                                    <div id="myEventsContainer">
+                                        <!-- My events will be populated here -->
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="payments" role="tabpanel">
+                                    <div id="paymentHistoryContainer">
+                                        <!-- Payment history will be populated here -->
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="notifications" role="tabpanel">
+                                    <h5>Notification Settings</h5>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                        <label class="form-check-label" for="emailNotifications">Email Notifications</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="smsNotifications" checked>
+                                        <label class="form-check-label" for="smsNotifications">SMS Notifications</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="eventReminders" checked>
+                                        <label class="form-check-label" for="eventReminders">Event Reminders</label>
+                                    </div>
+                                    <button class="btn btn-primary mt-3" onclick="saveNotificationSettings()">Save Settings</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chat Section -->
+        <section id="chat" class="container mt-4" style="display: none;">
+            <h2><i class="fas fa-comments"></i> Support Chat</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Chat Options</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <button class="list-group-item list-group-item-action" onclick="startChat('system')">
+                                    <i class="fas fa-headset"></i> System Support
+                                </button>
+                                <button class="list-group-item list-group-item-action" onclick="startChat('event')">
+                                    <i class="fas fa-calendar-check"></i> Event Head
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <h5>Recent Chats</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="recentChats">
+                                <!-- Recent chats will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card" id="chatContainer" style="height: 500px; display: none;">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 id="chatTitle">Chat</h5>
+                            <button class="btn btn-sm btn-outline-secondary" onclick="endChat()">
+                                <i class="fas fa-times"></i> End Chat
+                            </button>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div id="chatMessages" class="flex-grow-1 overflow-auto mb-3" style="height: 350px;">
+                                <!-- Chat messages will appear here -->
+                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="chatInput" placeholder="Type your message..." onkeypress="handleChatKeyPress(event)">
+                                <button class="btn btn-primary" onclick="sendMessage()">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chatWelcome" class="text-center mt-5">
+                        <i class="fas fa-comments fa-5x text-muted mb-3"></i>
+                        <h4>Select a chat option to start</h4>
+                        <p class="text-muted">Choose from System Support or Event Head to get assistance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Event Modal -->
+    <div class="modal fade" id="eventModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="eventModalTitle">Event Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="eventModalBody">
+                    <!-- Event details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="registerEventBtn" onclick="registerForEvent()">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Modal for Event Head Selection -->
+    <div class="modal fade" id="eventHeadModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Select Event Head</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="eventHeadsList">
+                        <!-- Event heads will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
